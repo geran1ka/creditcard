@@ -47,43 +47,28 @@ expirationdate.addEventListener('input', () => {
 })
 
 let masLet = IMask(cardnumber, mask[9].mask);
-console.log('masLet: ', masLet.masked.mask);
-
 
 cardnumber.addEventListener('input', (event)=> {
-  console.log('masLet: ', masLet.masked.mask);
   if (event.target.value.length > 4) {
+
     for (let i = 0; i < mask.length - 1; i++) {
       const regExp = new RegExp(mask[i]?.regex);
-      const res = regExp.test(event.target.value);
-        if (res) {
+        if (regExp.test(event.target.value)) {
           masLet.destroy();
-          masLet = IMask(cardnumber, mask[i].mask)
-          cardnumber.setAttribute('maxlength', mask[i].mask.length)
-          //masLet.masked.mask =  mask[i].mask;
+          masLet = IMask(cardnumber, mask[i].mask);
+          cardnumber.setAttribute('maxlength', mask[i].mask.length);
           cclogo.innerHTML = mask[i].logo;
-          swapColor(lightcolor, darkcolor, mask[i].color);
           ccicon.innerHTML = mask[i].icon;
-          //return
+          swapColor(lightcolor, darkcolor, mask[i].color);
         }
-        /*
-        if (!res) {
-          //masLet.masked.mask =  mask[9].mask;
-          masLet.destroy();
-          masLet = IMask(cardnumber, mask[9].mask)
-          cardnumber.setAttribute('maxlength', mask[9].mask.length)
-          cclogo.innerHTML = '';
-          swapColor(lightcolor, darkcolor, mask[9].color);
-          ccicon.innerHTML = '';
-        }*/
     }
   } else { 
     masLet.destroy();
-    masLet = IMask(cardnumber, mask[9].mask)
-    cardnumber.setAttribute('maxlength', mask[9].mask.length)
+    masLet = IMask(cardnumber, mask[9].mask);
+    cardnumber.setAttribute('maxlength', mask[9].mask.length);
     cclogo.innerHTML = '';
-    swapColor(lightcolor, darkcolor, mask[9].color);
     ccicon.innerHTML = '';
+    swapColor(lightcolor, darkcolor, mask[9].color);
   }
   
   svgnumber.textContent = event.target.value;
