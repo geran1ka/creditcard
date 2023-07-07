@@ -46,32 +46,46 @@ expirationdate.addEventListener('input', () => {
   svgexpire.textContent = expirationdate.value.replace(/(\d{2})(\d{2})/gi, '$1/$2')
 })
 
-//IMask(cardnumber, mask[9].mask);
+let masLet = IMask(cardnumber, mask[9].mask);
+console.log('masLet: ', masLet.masked.mask);
+
 
 cardnumber.addEventListener('input', (event)=> {
-
-  if (event.target.value.length === 6) {
+  console.log('masLet: ', masLet.masked.mask);
+  if (event.target.value.length > 4) {
     for (let i = 0; i < mask.length - 1; i++) {
       const regExp = new RegExp(mask[i]?.regex);
       const res = regExp.test(event.target.value);
         if (res) {
-          console.log('res');
-          IMask(event.target, mask[i].mask);
+          masLet.destroy();
+          masLet = IMask(cardnumber, mask[i].mask)
+          cardnumber.setAttribute('maxlength', mask[i].mask.length)
+          //masLet.masked.mask =  mask[i].mask;
           cclogo.innerHTML = mask[i].logo;
           swapColor(lightcolor, darkcolor, mask[i].color);
           ccicon.innerHTML = mask[i].icon;
-          return
+          //return
         }
+        /*
         if (!res) {
-          console.log('!res');
-
-          IMask(event.target, mask[9].mask);
+          //masLet.masked.mask =  mask[9].mask;
+          masLet.destroy();
+          masLet = IMask(cardnumber, mask[9].mask)
+          cardnumber.setAttribute('maxlength', mask[9].mask.length)
           cclogo.innerHTML = '';
           swapColor(lightcolor, darkcolor, mask[9].color);
           ccicon.innerHTML = '';
-        }
+        }*/
     }
+  } else { 
+    masLet.destroy();
+    masLet = IMask(cardnumber, mask[9].mask)
+    cardnumber.setAttribute('maxlength', mask[9].mask.length)
+    cclogo.innerHTML = '';
+    swapColor(lightcolor, darkcolor, mask[9].color);
+    ccicon.innerHTML = '';
   }
+  
   svgnumber.textContent = event.target.value;
 });
 
