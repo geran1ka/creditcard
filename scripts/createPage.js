@@ -18,7 +18,7 @@ const createForm = () => {
     ]),
     el('div', {className: 'field-container'}, [
       el('label', {for: 'cardnumber'}, 'Card Number'),
-      el('input', {id: 'cardnumber', type: 'text', pattern: '[0-9]*', inputmode: 'numeric'}), ccicon,
+      el('input', {id: 'cardnumber', type: 'text'/*, pattern: '[0-9]*', inputmode: 'numeric'*/}), ccicon,
     ]),
     el('div', {className: 'field-container'}, [
       el('label', {for: 'expirationdate'}, 'Expiration (mm/yy)'),

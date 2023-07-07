@@ -41,34 +41,38 @@ expirationdate.addEventListener('input', () => {
     mask: '00/00',
     lazy: false
   } 
-  new IMask(expirationdate, maskOptionsDate).alignCursor();
+  IMask(expirationdate, maskOptionsDate).alignCursor();
   expirationdate.value = expirationdate.value.replace(/\D+/, '');
   svgexpire.textContent = expirationdate.value.replace(/(\d{2})(\d{2})/gi, '$1/$2')
 })
 
+//IMask(cardnumber, mask[9].mask);
 
-cardnumber.addEventListener('input', ()=> {
+cardnumber.addEventListener('input', (event)=> {
 
-  if (cardnumber.value.length === 4) {
+  if (event.target.value.length === 6) {
     for (let i = 0; i < mask.length - 1; i++) {
       const regExp = new RegExp(mask[i]?.regex);
-      const res = regExp.test(cardnumber.value);
+      const res = regExp.test(event.target.value);
         if (res) {
-          new IMask(cardnumber, mask[i].mask);
+          console.log('res');
+          IMask(event.target, mask[i].mask);
           cclogo.innerHTML = mask[i].logo;
           swapColor(lightcolor, darkcolor, mask[i].color);
           ccicon.innerHTML = mask[i].icon;
           return
         }
         if (!res) {
-          new IMask(cardnumber, mask[9].mask);
+          console.log('!res');
+
+          IMask(event.target, mask[9].mask);
           cclogo.innerHTML = '';
           swapColor(lightcolor, darkcolor, mask[9].color);
           ccicon.innerHTML = '';
         }
     }
   }
-  svgnumber.textContent = cardnumber.value;
+  svgnumber.textContent = event.target.value;
 });
 
 
