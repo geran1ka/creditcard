@@ -28,6 +28,9 @@ const createForm = () => {
       el('label', {for: 'securitycode'}, 'Security Code'),
       el('input', {id: 'securitycode', type: 'text', pattern: '[0-9]*', inputmode: 'numeric', maxlength: 3}),
     ]),
+    el('div', {className: 'field-container'}, [
+      el('button', {className: 'form-button', type: 'submit'}, 'Отправить'),
+    ]),
   ])
 }
 
@@ -127,6 +130,19 @@ export const createPage = () => {
   const title = createTitle();
   const creditCard = createCreditCard();
   const form = createForm();
-  return setChildren(document.body, [title, creditCard, form,]);
+  setChildren(document.body, [title, creditCard, form,]);
+  return {
+    title,
+    creditCard,
+    form
+  }
 }
 
+const sdvg = svg('svg', {class: "dub"})
+console.log('sdvg: ', sdvg.className);
+
+export const createMessage = (message) => {
+  return el('div', {className: 'message'}, [
+    el('h2', {className: 'message-title'}, message)
+  ])
+}

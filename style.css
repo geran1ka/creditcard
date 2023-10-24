@@ -13,13 +13,14 @@ body {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     font-family: 'Raleway';
 }
 
-.payment-title {
+.payment-title,
+.message {
     width: 100%;
     text-align: center;
 }
@@ -53,8 +54,8 @@ body {
     display: grid;
     grid-column-gap: 10px;
     grid-template-columns: auto auto;
-    grid-template-rows: 90px 90px 90px;
-    grid-template-areas: "name name""number number""expiration security";
+    grid-template-rows: 90px 90px 90px min-content;
+    grid-template-areas: "name name""number number""expiration security""btn btn";
     max-width: 400px;
     padding: 20px;
     color: #707070;
@@ -350,4 +351,28 @@ input {
 .creditcard.flipped {
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
+}
+
+.form-button {
+    width: 100%;
+    grid-area: btn;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    background-color: gray;
+    outline: none;
+    font-size: 24px;
+
+    transition: color .3s ease-in-out,
+        background-color .3s ease-in-out,
+        transform .3s ease-in-out;
+}
+
+.form-button:hover {
+    background-color: #4C4C4C;
+}
+
+.form-button:active {
+    background-color: #150c0c;
+    transform: scale(0.9);
 }

@@ -1,9 +1,12 @@
-import { createPage } from "./scripts/createPage.js";
+import { createMessage, createPage } from "./scripts/createPage.js";
 import IMask from "imask";
 import { swapColor } from "./scripts/swapColor.js";
 import { mask } from "./scripts/mask.js";
+import isValidateCVC from "./scripts/isValidateCVC.js";
+import isValidateName from "./scripts/isValidateName.js";
+import isValidateNumberCard from "./scripts/isValidateNumber.js";
 
-createPage();
+const {title, creditCard, form} = createPage();
 
 const name = document.getElementById('name');
 const cardnumber = document.getElementById('cardnumber');
@@ -19,6 +22,9 @@ const svgnameback = document.getElementById('svgnameback')
 const lightcolor = document.querySelectorAll('.lightcolor');
 const darkcolor = document.querySelectorAll('.darkcolor');
 const creditcard = document.querySelector('.creditcard');
+const btnSubmit = document.querySelector('.form-button');
+
+
 
 
 creditcard.addEventListener('click', () => {
@@ -73,6 +79,22 @@ cardnumber.addEventListener('input', (event)=> {
   
   svgnumber.textContent = event.target.value;
 });
+
+btnSubmit.addEventListener('click', () => {
+  let message;
+  if (isValidateCVC(securitycode.value) &&
+      isValidateName(name.value) &&
+      isValidateNumberCard(cardnumber.value.split(' ').join(''))) {
+    message = createMessage('Данные валидны');
+  } else {
+    message = createMessage('Данные не валидны');
+  }
+
+  document.body.append(message);
+  setTimeout(() => {
+    message.remove();
+  }, 2000)
+})
 
 
 
