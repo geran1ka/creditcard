@@ -66,7 +66,7 @@ describe('Тестирование кредитной карты', () => {
     cy.get('[id="name"]').type('Roman Khoruzhy');
     cy.get('[id="cardnumber"]').type('444455552222111');
     cy.get('[id="expirationdate"]').type('1012');
-    cy.get('[id="securitycode"]').type('02');
+    cy.get('[id="securitycode"]').type('023');
     cy.get('.form-button').click();
     cy.get('.message-title').contains('Данные не валидны')
   })
